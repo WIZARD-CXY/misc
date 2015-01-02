@@ -2,26 +2,21 @@ package main
 
 import (
 	"fmt"
-
-	"time"
+	//"time"
 )
 
-func ready(w string, sec int) {
-	time.Sleep(time.Duration(sec) * time.Second)
-	fmt.Println(w, "is ready!")
-	c <- 1
-}
-
-var c chan int
-
 func main() {
-	c = make(chan int, 1)
-	go ready("Tea", 2)
-	ready("Coffee", 1)
-	fmt.Println("I'm waiting")
-	time.Sleep(5 * time.Second)
+	message := make(chan string)
+	count := 3
 
-	fmt.Println(<-c)
-	//<-c
-	//<-c
+	go func() {
+		for i := 1; i <= count; i++ {
+			message <- fmt.Sprintf("message %d", i)
+		}
+		close(message)
+	}()
+
+	for msg := range message {
+		fmt.Println(msg)
+	}
 }

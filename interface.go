@@ -20,7 +20,9 @@ type I interface {
 	Set(int)
 }
 
-type R struct{ i int }
+type R struct {
+	i int
+}
 
 func (p *R) Get() int  { return p.i }
 func (p *R) Set(v int) { p.i = v }
@@ -53,8 +55,8 @@ func main() {
 	var s S
 	f(&s)
 	fmt.Println(g(&s))
-	i := 5
-	fmt.Println(g(i))
+	//i := 5
+	//fmt.Println(g(i))
 	var r R
 	f(&r)
 }

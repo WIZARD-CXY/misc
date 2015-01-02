@@ -6,8 +6,14 @@ import "time"
 import "github.com/golang/glog"
 
 var (
-	wahaha int = 9
+	wahaha     int = 9
+	interfacea     = []a{}
 )
+
+type a interface {
+	num2string(num int) string
+	string2num(s string) int
+}
 
 func main() {
 	// lock1 := sync.Mutex{}
