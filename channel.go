@@ -1,35 +1,29 @@
 package main
 
 import (
-	"fmt"
-	"math/rand"
-	"time"
+	"github.com/coreos/go-etcd/etcd"
+	"log"
 )
 
 //return a raw message channel of string
-func getRawMessageChannel() chan interface{} {
-	c := make(chan interface{})
+func getRawMessageChannel() chan *etcd.Response {
+	watchChan := make(chan *etcd.Response)
 
 	go func() {
-		for msg := range c {
-			fmt.Println(msg)
+		for r := range watchChan {
+			log.Printf("Got updated creds : %s: %s\n", r.Node.Key, r.Node.Value)
 		}
 	}()
 
-	return c
+	return watchChan
 }
 
-//return a message channel of string
-func processmessage(v chan interface{}) {
-	i := 1
+//get response from channel of etcd.Response
+func processmessage(v chan *etcd.Response) {
+	/*i := 1*/
+	client := etcd.NewClient([]string{"http://10.10.103.224:4001"})
 
-	go func() {
-		for {
-			v <- fmt.Sprintf("message %d", i)
-			time.Sleep(time.Second * time.Duration((rand.Intn(5))))
-			i++
-		}
-	}()
+	go client.Watch("/creds", 0, false, v, nil)
 
 }
 
