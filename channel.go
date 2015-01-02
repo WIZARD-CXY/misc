@@ -7,8 +7,8 @@ import (
 )
 
 //return a raw message channel of string
-func getRawMessageChannel() chan string {
-	c := make(chan string)
+func getRawMessageChannel() chan interface{} {
+	c := make(chan interface{})
 
 	go func() {
 		for msg := range c {
@@ -17,11 +17,10 @@ func getRawMessageChannel() chan string {
 	}()
 
 	return c
-
 }
 
 //return a message channel of string
-func processmessage(v chan string) {
+func processmessage(v chan interface{}) {
 	i := 1
 
 	go func() {
