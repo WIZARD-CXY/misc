@@ -1,18 +1,19 @@
 package main
 
 import (
-	"github.com/dotcloud/docker/pkg/netlink"
+	"fmt"
+	"github.com/docker/libcontainer/netlink"
 	"log"
 	"net"
 )
 
 func main() {
 	// create a new bridge
-	if err := netlink.CreateBridge("mydocker0", false); err != nil {
+	if err := netlink.CreateBridge("mydocker1", false); err != nil {
 		log.Fatal(err)
 	}
 	// get the bridge
-	bridge, err := net.InterfaceByName("mydocker0")
+	bridge, err := net.InterfaceByName("mydocker1")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -30,4 +31,6 @@ func main() {
 	if err := netlink.NetworkLinkUp(bridge); err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println("ip 10.10.0.3 %+v", net.ParseIP("10.10.0.3"))
 }
