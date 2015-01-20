@@ -15,6 +15,14 @@ type a interface {
 	string2num(s string) int
 }
 
+func getInt() int {
+	return 1
+}
+
+func getInt2() int {
+	return 2
+}
+
 func main() {
 	// lock1 := sync.Mutex{}
 	// lock2 := sync.Mutex{}
@@ -29,6 +37,13 @@ func main() {
 	// //lock3.Unlock()
 	// lock2.Lock()
 	// lock1.Lock()
+
+	go func() {
+		fmt.Println("in first goroutine")
+		go func() {
+			fmt.Println("in second goroutine")
+		}()
+	}()
 
 	time.Sleep(10 * time.Second)
 	glog.Fatalf("Error creating root directory: ")

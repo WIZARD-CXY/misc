@@ -38,7 +38,7 @@ func main() {
 	flag.StringVar(&config.SubnetMin, "subnet-min", "", "container network min subnet")
 	flag.StringVar(&config.SubnetMax, "subnet-max", "", "container network max subnet")
 	flag.UintVar(&config.SubnetLen, "subnet-len", 0, "container network subnet length")
-	flag.UintVar(&config.Backend.VNI, "vni", 0, "vxlan network identifier")
+	flag.UintVar(&config.Backend.VNI, "vni", 1, "vxlan network identifier")
 	flag.UintVar(&config.Backend.Port, "port", 0, "vxlan communication port (UDP)")
 	etcdAddr := flag.String("etcdAddr", "127.0.0.1:4001", "etcd address")
 	etcdKey := flag.String("key", "/coreos.com/network/config", "flannel etcd configuration key")
@@ -49,6 +49,7 @@ func main() {
 		log.Fatal(err)
 	}
 	data := string(bytes)
+	fmt.Printf("key: %+v, value:%+v\n", *etcdKey, data)
 
 	client := etcd.NewClient([]string{"http://" + *etcdAddr})
 	if err := networkConfigAttempts.Run(func() error {
@@ -74,6 +75,7 @@ func main() {
 			flanneld,
 			"-etcd-endpoints=http://" + *etcdAddr,
 			"-iface=" + os.Getenv("EXTERNAL_IP"),
+			"-v=" + os.Getenv("DEBUG"),
 		},
 		os.Environ(),
 	); err != nil {
