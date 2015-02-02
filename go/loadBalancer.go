@@ -14,6 +14,7 @@ type Request struct {
 func workFn() {
 	return rand.Intn(100)
 }
+
 func requester(work chan<- Request) {
 	c := make(chan int)
 

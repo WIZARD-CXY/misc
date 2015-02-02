@@ -23,6 +23,8 @@ func getInt2() int {
 	return 2
 }
 
+//var s string
+
 func main() {
 	// lock1 := sync.Mutex{}
 	// lock2 := sync.Mutex{}
@@ -44,6 +46,20 @@ func main() {
 			fmt.Println("in second goroutine")
 		}()
 	}()
+
+	s := "abc"
+
+	println(&s)
+
+	s, y := "test", 20
+
+	println(&s, y)
+
+	{
+		s, z := 1000, 30
+		// 定义新同名变量: 不在同一一层次代码块。
+		println(&s, z)
+	}
 
 	time.Sleep(10 * time.Second)
 	glog.Fatalf("Error creating root directory: ")
