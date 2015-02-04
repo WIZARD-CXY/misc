@@ -6,17 +6,12 @@
 read -p "Please input (Y/N):" flag
 
 if [ "$flag" == "Y" ] || [ "$flag" == "y" ]; then
-
-   echo "OK,continue!"
-   exit 0
-
+    echo "OK,continue!"
+    exit 0
+elif [ "$flag" == "N" ] || [ "$flag" == "n" ]; then
+	echo "Oh,interrupt!"
+    exit 0
+else
+	echo "unsupported command"
+    exit 1
 fi
-
-if [ "$flag" == "N" ] || [ "$flag" == "n" ]; then
-
-   echo "Oh,interrupt!"
-   exit 0
-
-fi
-
-echo "I don't hnow what your choice is" && exit 0
