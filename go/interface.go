@@ -1,62 +1,47 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
+import "math"
 
-type S struct {
-	i int
+type geometry interface{
+    area() float64
+    perim() float64
 }
 
-func (p *S) Get() int {
-	return p.i
-}
-func (p *S) Set(v int) {
-	p.i = v
+type square struct{
+    width,height float64
 }
 
-type I interface {
-	Get() int
-	Set(int)
+type circle struct{
+    radius float64
 }
 
-type R struct {
-	i int
+func (s square) area() float64{
+    return s.width * s.height
 }
 
-func (p *R) Get() int  { return p.i }
-func (p *R) Set(v int) { p.i = v }
-
-func f(p I) {
-	// fmt.Println(p.Get())
-	// p.Set(122)
-	// fmt.Println(p.Get())
-	switch p.(type) {
-	case *S:
-		fmt.Println("*S")
-		break
-	case *R:
-		fmt.Println("*R")
-		break
-	// case S:
-	// 	fmt.Println("S")
-	// 	break
-	// case R:
-	// 	fmt.Println("R")
-	// 	break
-	default:
-	}
-}
-func g(sth interface{}) int {
-	return sth.(I).Get()
+func (s square) perim() float64{
+    return 2*(s.width + s.height)
 }
 
-func main() {
-	var s S
-	f(&s)
-	fmt.Println(g(&s))
-	//i := 5
-	//fmt.Println(g(i))
-	var r R
-	f(&r)
+func (c circle) area() float64{
+    return math.Pi*c.radius*c.radius
+}
+
+func (c circle) perim() float64{
+    return 2*math.Pi*c.radius
+}
+
+func measure(g geometry){
+    fmt.Println(g)
+    fmt.Println(g.area())
+    fmt.Println(g.perim())
+}
+
+func main(){
+    s:=square{width:3,height:4}
+    c:=circle{radius:5}
+
+    measure(s)
+    measure(c)
 }
