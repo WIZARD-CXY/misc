@@ -35,4 +35,59 @@ public:
 
 };
 
-typdef void(*Fun)(void);
+typedef void(*Fun)(void);
+
+int main(){
+    Fun pFun = NULL;
+
+    Derive d;
+    int** pVtab = (int**)&d;
+
+    //Base1's vtable
+    pFun = (Fun)pVtab[0][0];
+    pFun();
+
+//    pFun = (Fun)pVtab[0][1];
+    pFun = (Fun)*((int*)*(int*)((int*)&d+0)+1);
+    pFun();
+
+    pFun = (Fun)pVtab[0][2];
+    pFun();
+    
+    pFun = (Fun)pVtab[0][3];
+    pFun();
+
+    
+//    pFun = (Fun)pVtab[0][4];
+//    pFun();
+
+    //Base2's vtable
+    pFun = (Fun)pVtab[1][0];
+    pFun();
+
+    pFun = (Fun)pVtab[1][1];
+    pFun();
+
+    pFun = (Fun)pVtab[1][2];
+    pFun();
+    
+    pFun = (Fun)pVtab[1][3];
+    pFun();
+
+    //Base3's vtable
+    pFun = (Fun)pVtab[2][0];
+    pFun();
+
+    pFun = (Fun)pVtab[2][1];
+    pFun();
+
+    pFun = (Fun)pVtab[2][2];
+    pFun();
+    
+    pFun = (Fun)pVtab[2][3];
+    pFun();
+
+    return 0;
+}
+
+
