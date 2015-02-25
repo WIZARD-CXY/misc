@@ -6,6 +6,7 @@
  ************************************************************************/
 
 #include<iostream>
+#include<cstring>
 using namespace std;
 
 class A {
@@ -26,7 +27,26 @@ public:
 };
 
 int main(){
-    A a = A(10);
-    A b=a;
-    b.Print();
+    A *a = new A(10);
+    A *b=a;
+    b->Print();
+
+    A aa(100);
+    aa.Print();
+    //string test
+    char str[10];
+
+    strcpy(str,"012345678910111213");
+    cout<<str<<endl;
+
+    //string memory test
+
+    char s1[] = "hello world";
+    char s2[] = "hello world";
+
+    char *s3 = "hello world";
+    char *s4 = "hello world";
+
+    cout<<(s1==s2)<<endl<<(s3==s4)<<endl;
 }
+
