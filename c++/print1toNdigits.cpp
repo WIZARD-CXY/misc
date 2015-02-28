@@ -49,5 +49,5 @@ void Print1toNdigits(int n){
     generate(number,n,0);
 }
 int main(){
-    Print1toNdigits(30);
+    Print1toNdigits(9);
 }
