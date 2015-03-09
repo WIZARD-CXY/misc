@@ -29,9 +29,8 @@ int partition(int a[], int p, int r){
             swap(a[++i],a[j]);
         }
     }
-
     swap(a[++i],a[r]);
-    
+
     return i;
 }
 void quicksort(int a[], int p, int r){
