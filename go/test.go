@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(os.Getenv("GOPATH"))
+	fmt.Println(os.Getenv("DOCKER_HOST"))
 }
