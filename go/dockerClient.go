@@ -4,6 +4,7 @@ package main
 // reference http://godoc.org/github.com/fsouza/go-dockerclient
 import (
 	"fmt"
+	"os"
 
 	docker "github.com/fsouza/go-dockerclient"
 )
@@ -27,7 +28,13 @@ type DockerInterface interface {
 }
 
 func main() {
-	endpoint := "http://127.0.0.1:2375"
+	endpoint := os.Getenv("DH")
+
+	if endpoint == "" {
+		fmt.Println("DH env is not set and return ")
+		return
+	}
+	fmt.Println(endpoint)
 	client, err := docker.NewClient(endpoint)
 
 	if err != nil {
@@ -63,7 +70,7 @@ func main() {
 
 	//we prepared a HostConfig used to start a container
 	hc := &docker.HostConfig{
-		NetworkMode: "none",
+		NetworkMode: "",
 		Privileged:  true,
 	}
 
