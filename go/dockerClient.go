@@ -70,8 +70,7 @@ func main() {
 
 	//we prepared a HostConfig used to start a container
 	hc := &docker.HostConfig{
-		NetworkMode: "none",
-		Privileged:  true,
+		Privileged: true,
 	}
 
 	err = client.StartContainer(dockerContainer.ID, hc)
@@ -79,5 +78,5 @@ func main() {
 	if err != nil {
 		fmt.Printf("Container started failed with ID %d\n", dockerContainer.ID)
 	}
-	fmt.Printf("Container started with ID %d\n", dockerContainer.ID)
+	fmt.Printf("Container started with ID %s\n", dockerContainer.ID)
 }
