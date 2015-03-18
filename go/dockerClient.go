@@ -70,7 +70,8 @@ func main() {
 
 	//we prepared a HostConfig used to start a container
 	hc := &docker.HostConfig{
-		Privileged: true,
+		NetworkMode: "",
+		Privileged:  true,
 	}
 
 	err = client.StartContainer(dockerContainer.ID, hc)
