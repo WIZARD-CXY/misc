@@ -62,7 +62,7 @@ func main() {
 	dockerContainer, err := client.CreateContainer(config)
 
 	if err != nil {
-		fmt.Println("create error")
+		fmt.Println("create error", err)
 		return
 	}
 
