@@ -1,0 +1,18 @@
+id: sshd2
+kind: Pod
+apiVersion: v1beta1
+desiredState:
+  manifest:
+    version: v1beta1
+    id: sshd2
+    containers:
+      - name: sshd2
+        image: 10.10.103.215:5000/sshd
+        ports:
+          - name: sshd
+            containerPort: 22
+        env:
+          - key: NETWORK
+            value: "test"
+labels:
+  name: sshd
