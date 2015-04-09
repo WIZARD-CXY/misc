@@ -29,6 +29,7 @@ type DockerInterface interface {
 
 func main() {
 	endpoint := os.Getenv("DH")
+	networkID := os.Getenv("NET")
 
 	if endpoint == "" {
 		fmt.Println("DH env is not set and return ")
@@ -38,7 +39,7 @@ func main() {
 	client, err := docker.NewClient(endpoint)
 
 	if err != nil {
-		fmt.Println("client create failed")
+		fmt.Println("docker client create failed")
 	}
 	/*imgs, _ := client.ListImages(docker.ListImagesOptions{All: false})
 	for _, img := range imgs {
@@ -57,6 +58,14 @@ func main() {
 			Hostname: "haha",
 			Image:    "10.10.103.215:5000/sshd",
 		},
+	}
+
+	if networkID != "" {
+		var envs []string
+		envs = append(envs, "SP_NETWORK="+networkID)
+		config.Config.Env = envs
+		fmt.Println("Using network", networkID)
+
 	}
 
 	dockerContainer, err := client.CreateContainer(config)
