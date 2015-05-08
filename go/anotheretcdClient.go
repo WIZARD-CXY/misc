@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	client := etcd.NewClient([]string{"http://10.10.103.224:4001"})
+	client := etcd.NewClient([]string{"http://10.10.103.223:4001"})
 	resp, err := client.Get("/creds/", true, false)
 
 	if err != nil {

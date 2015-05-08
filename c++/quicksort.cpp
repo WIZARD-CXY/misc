@@ -24,6 +24,7 @@ void display(int a[],int n){
 int partition(int a[], int p, int r){
     int i=p-1;
 
+    //choose a[r] as pivot
     for(int j=p; j<r; j++){
         if(a[j]<a[r]){
             swap(a[++i],a[j]);

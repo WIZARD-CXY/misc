@@ -12,4 +12,5 @@ desiredState:
           - name: sshd
             containerPort: 22
 labels:
-  name: sshd
+  name: client
+  uses: sshd

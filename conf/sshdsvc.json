@@ -1,0 +1,14 @@
+{
+  "id": "sshd",
+  "kind": "Service",
+  "apiVersion": "v1beta1",
+  "port": 2222,
+  "containerPort": 22,
+  "selector": {
+    "name": "sshd"
+  },
+  "labels": {
+    "name": "sshd"
+  },
+  "createExternalLoadBalancer": false
+}
