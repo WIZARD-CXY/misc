@@ -1,0 +1,10 @@
+apiVersion: v1beta1
+externalID: 121.40.236.126
+hostIP: 121.40.236.126
+id: 121.40.236.126
+kind: Node
+resources:
+  capacity:
+    # Adjust these to match your node
+    cpu: "1"
+    memory: 1073741824

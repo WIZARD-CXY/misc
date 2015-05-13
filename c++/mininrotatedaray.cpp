@@ -2,6 +2,9 @@ int Min(int *numbers, int len){
 	if(numbers == null || len <=0){
 		throw new std::exception("Invalid params")
 	}
+	if(len==1){
+		return numbers[0];
+	}
 
 	int index1=0;
 	int index2=len-1;
