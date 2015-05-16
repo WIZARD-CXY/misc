@@ -48,5 +48,20 @@ int main(){
     char *s4 = "hello world";
 
     cout<<(s1==s2)<<endl<<(s3==s4)<<endl;
+
+    int n=9;
+    string s(n,'0');
+
+    cout<<s<<endl;
+    for(int i=0; i<n; i++){
+        s[i]+=i+1;
+    }
+    cout<<s<<endl;
+
+    s.erase(s.begin());
+
+    cout<<s<<endl;
+
+
 }
 
