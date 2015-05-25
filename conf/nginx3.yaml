@@ -1,0 +1,13 @@
+mapiVersion: v1beta3
+kind: Pod
+metadata:
+  labels:
+    env: test
+  name: nginx3
+spec:
+  containers:
+  - image: reg:5000/nginx:1.7.9
+    imagePullPolicy: IfNotPresent
+    name: nginx3
+  nodeSelector:
+    name: m4

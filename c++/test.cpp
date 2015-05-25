@@ -62,6 +62,9 @@ int main(){
 
     cout<<s<<endl;
 
-
+    int *pp=new int(10);
+    cout<<"Before: "<<pp<<endl;
+    delete pp;
+    cout<<"After: "<<*pp<<endl;
 }
 

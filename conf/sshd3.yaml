@@ -6,11 +6,14 @@ desiredState:
     version: v1beta1
     id: sshd3
     containers:
-      - name: sshd3
-        image: 10.10.103.215:5000/sshd
+      - name: master
+        image: 121.40.171.96:5000/sshd
+        cpu: 1000
         ports:
           - name: sshd
             containerPort: 22
+        env:
+          - key: NETWORK
+            value: "test"
 labels:
-  name: client
-  uses: sshd
+  name: sshd
