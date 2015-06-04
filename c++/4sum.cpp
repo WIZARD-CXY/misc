@@ -25,7 +25,6 @@ bool bs(int x, int n,int A[]){
 }
 
 void solve(int A[],int n){
-
 	bool f=false;
 
 	for(int c=0; c<n; c++){

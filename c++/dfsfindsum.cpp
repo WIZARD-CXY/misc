@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int target = 5;
+int target = 22;
 int n=8;
 
 int A[]={2,3,4,1,67,34,-20,45};

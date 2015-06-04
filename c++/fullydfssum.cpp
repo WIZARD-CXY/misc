@@ -4,33 +4,35 @@
 
 using namespace std;
 
-int target = 9;
-int n=3;
+int target = 5;
+int n=6;
 
-int A[]={2,3,6};
-vector<int> path;
+int A[]={2,3,6,5,4,1};
 vector<vector<int> > paths;
 
-void dfs(int i, int sum){
+void dfs(int i, int sum, vector<int> &path){
+	if(i>n){
+		return;
+	}
 	if(i==n){
 		if(sum==target){         
            paths.push_back(path);
 		}
-		return;
 		
 	}
 
     //not take A[i] into consideration
-	dfs(i+1,sum);
+	dfs(i+1,sum,path);
 
     // take A[i] into the consideration
     path.push_back(A[i]);
-	dfs(i+1,sum+A[i]);
+	dfs(i+1,sum+A[i],path);
 	path.pop_back();
 }
 
 void solve(){
-	dfs(0,0);
+	vector<int> path;
+	dfs(0,0,path);
 }
 
 int main(){
@@ -38,7 +40,7 @@ int main(){
 
 	for(int i=0; i<paths.size(); i++){
         for(int j=0; j<paths[i].size(); j++){
-            cout<<path[j]<<" ";
+            cout<<paths[i][j]<<" ";
         }
         cout<<endl;
     }
