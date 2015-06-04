@@ -7,4 +7,4 @@ resources:
   capacity:
     # Adjust these to match your node
     cpu: "1"
-    memory: 1073741824
+    memory: 2147483648

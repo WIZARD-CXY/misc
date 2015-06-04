@@ -1,0 +1,22 @@
+apiVersion: v1beta3
+kind: ReplicationController
+metadata:
+  labels:
+    name: gorouter
+  name: gorouter
+spec:
+  replicas: 1
+  selector:
+    name: gorouter
+  template:
+    metadata:
+      labels:
+        name: gorouter
+    spec:
+      containers:
+      - image: wizardcxy/gorouter
+        name: gorouter
+        ports:
+          - containerPort: 8081
+            hostPort: 80
+          - containerPort: 8082

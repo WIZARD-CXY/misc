@@ -13,7 +13,7 @@ desiredState:
           - name: sshd
             containerPort: 22
         env:
-          - key: NETWORK
+          - key: SP
             value: "test"
     nodeSelector:
       name: m4
