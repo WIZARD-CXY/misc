@@ -4,10 +4,11 @@
 
 using namespace std;
 
-int target = 5;
+int target = 3;
 int n=6;
 
-int A[]={2,3,6,5,4,1};
+// must add one dummy element in the end in case dfs search search A[n]
+int A[]={2,3,6,5,4,-1,0};
 vector<vector<int> > paths;
 
 void dfs(int i, int sum, vector<int> &path){
