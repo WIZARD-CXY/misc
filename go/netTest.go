@@ -7,14 +7,27 @@ import "bytes"
 
 func main() {
 	//string convert to net.IP ,then convert to uint32
-	cidr := "255.0.0.0/11"
+	cidr := "192.168.0.0/16"
 	_, ipNet, _ := net.ParseCIDR(cidr)
+	ipString := "192.168.0.4"
+	ipp := net.ParseIP(ipString)
+
+	var nump uint32
+
+	bufp := bytes.NewBuffer(ipp.To4())
+
+	err := binary.Read(bufp, binary.BigEndian, &nump)
+	if err == nil {
+		fmt.Println("hahap", nump)
+	} else {
+		fmt.Println(err)
+	}
 
 	var num uint32
 
 	buf := bytes.NewBuffer(ipNet.IP)
 
-	err := binary.Read(buf, binary.BigEndian, &num)
+	err = binary.Read(buf, binary.BigEndian, &num)
 	if err == nil {
 		fmt.Println("haha", num)
 	} else {
