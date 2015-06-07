@@ -6,4 +6,4 @@ struct cmp{
 	}
 };
 
-priority_queue<int, vector<int>, cmp> q; // gewwei digit bigger priority is smaller
+priority_queue<int, vector<int>, cmp> q; // gewei digit bigger priority is smaller
