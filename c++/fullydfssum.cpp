@@ -4,22 +4,19 @@
 
 using namespace std;
 
-int target = 3;
+int target = -1;
 int n=6;
 
 // must add one dummy element in the end in case dfs search search A[n]
-int A[]={2,3,6,5,4,-1,0};
+int A[]={2,3,6,5,4,-1};
 vector<vector<int> > paths;
 
 void dfs(int i, int sum, vector<int> &path){
-	if(i>n){
-		return;
-	}
 	if(i==n){
 		if(sum==target){         
            paths.push_back(path);
 		}
-		
+		return;
 	}
 
     //not take A[i] into consideration
@@ -31,13 +28,9 @@ void dfs(int i, int sum, vector<int> &path){
 	path.pop_back();
 }
 
-void solve(){
+int main(){
 	vector<int> path;
 	dfs(0,0,path);
-}
-
-int main(){
-	solve();
 
 	for(int i=0; i<paths.size(); i++){
         for(int j=0; j<paths[i].size(); j++){

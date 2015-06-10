@@ -1,7 +1,7 @@
 apiVersion: v1beta1
-externalID: 121.40.236.126
-hostIP: 121.40.236.126
-id: 121.40.236.126
+externalID: 10.168.10.5
+hostIP: 10.168.10.5
+id: 10.168.10.5
 kind: Node
 resources:
   capacity:
