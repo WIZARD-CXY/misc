@@ -41,14 +41,17 @@ int bs(int A[], int x, int y, int v){
 			x=m+1;
 		}
 	}
-	return -1;
+	return x;
 }
 
 int main(){
 	int A[]={-1,1,2,3,3,9,10};
-
-	cout<<lower_bound(A,0,7,4)<<endl;
-	cout<<upper_bound(A,0,7,4)<<endl;
-	cout<<bs(A,0,7,10)<<endl;
+    int n;
+    cin>>n;
+	cout<<lower_bound(A,0,7,3)<<endl;//prints 3
+	cout<<upper_bound(A,0,7,3)<<endl;//prints 5
+	cout<<lower_bound(A,0,7,4)<<endl;//prints 5
+	cout<<upper_bound(A,0,7,4)<<endl;//prints 5
+	cout<<bs(A,0,7,n)<<endl;//prints 6
 
 }
