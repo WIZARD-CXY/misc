@@ -20,3 +20,5 @@ spec:
           - containerPort: 8081
             hostPort: 80
           - containerPort: 8082
+      nodeSelector:
+        name: ma
