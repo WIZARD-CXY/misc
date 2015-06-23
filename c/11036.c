@@ -7,8 +7,9 @@ struct stud_node{
 };
 void Ptrint_Stu_Doc(struct stud_node *head);
 void main()
-{
-	struct stud_node *L,*tail1,*tail2,*p1,*p2,*NEW;
+{   
+	freopen("11036.txt","r",stdin);
+	struct stud_node *L,*tail1,*tail2,*p1,*p2,*pre,*NEW;
 	int num;
 	int size=sizeof(struct stud_node);
 
@@ -35,11 +36,12 @@ void main()
 
 	if(L != NULL)
         p2 = L;
-    NEW=tail2=NULL;
+    dummy=NULL;
 	while(p2!= NULL)
     {
-        if(p2->num % 2)
+        if((p2->num % 2)==0)
         {
+        	// current is point to even number
             if(NEW==NULL)
             {
                 NEW = p2;
@@ -50,14 +52,16 @@ void main()
                 tail2->next = p2;
                 tail2 = tail2->next;
             }
+            temp=p2->next;
+            tail2->next=NULL;
+            p2=temp;
+            continue;
         }
         p2 = p2->next;
-        tail2->next=NULL;
     }
 
 	Ptrint_Stu_Doc(NEW);
-	//free(L);
-	//free(NEW);
+
 	return;
 
 }
