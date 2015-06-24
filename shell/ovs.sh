@@ -1,24 +1,28 @@
 #!/bin/bash
 
 # add the namespaces
-ip netns add ns1
-ip netns add ns2
+ip netns add ns3
+ip netns add ns4
 # create the switch
 BRIDGE=ovs-test
-ovs-vsctl add-br $BRIDGE
+ovs-vsctl --may-exist add-br $BRIDGE
 #
 #### PORT 1
 # create an internal ovs port
-ovs-vsctl add-port $BRIDGE tap1 -- set Interface tap1 type=internal
+ovs-vsctl add-port $BRIDGE tap3  tag=11 -- set Interface tap3 type=internal
 # attach it to namespace
-ip link set tap1 netns ns1
+ip link set tap3 netns ns3
 # set the ports to up
-ip netns exec ns1 ip link set dev tap1 up
+ip netns exec ns3 ip link set dev tap3 up
+
 #
 #### PORT 2
 # create an internal ovs port
-ovs-vsctl add-port $BRIDGE tap2 -- set Interface tap2 type=internal
+ovs-vsctl add-port $BRIDGE tap4 tag=11 -- set Interface tap4 type=internal
 # attach it to namespace
-ip link set tap2 netns ns2
+ip link set tap4 netns ns4
 # set the ports to up
-ip netns exec ns2 ip link set dev tap2 up
+ip netns exec ns4 ip link set dev tap4 up
+
+# show specific bridge mac learning table
+#ovs-appctl fdb/show $bridgeName 
