@@ -6,8 +6,6 @@ metadata:
   name: nginx
 spec:
   containers:
-  - image: reg:5000/nginx:1.7.9
+  - image: nginx:1.7.9
     imagePullPolicy: IfNotPresent
     name: nginx
-  nodeSelector:
-    name: m4
