@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sshd
+spec:
+  ports:
+    - port: 22
+  selector:
+    name: sshd

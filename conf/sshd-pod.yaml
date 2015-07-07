@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sshd-pod2
+  labels:
+    name: sshd-pod
+    id: test2
+spec:
+  containers:
+    - name: sshd-pod
+      image: 10.10.103.215:5000/sshd
+  restartPolicy: Never
