@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: apm
+  labels:
+    name: apm
+spec:
+  replicas: 1
+  selector:
+    name: apm
+  template:
+    metadata:
+      labels:
+        name: apm
+    spec:
+      containers:
+      - name: apm
+        image: liuyang/apm-dc-master:v6
+        ports:
+        - containerPort: 6669
+      nodeSelector:
+        kubernetes.io/hostname: 10.10.103.250
