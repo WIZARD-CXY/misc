@@ -19,4 +19,5 @@ spec:
         ports:
         - containerPort: 6669
       nodeSelector:
+        # node name
         kubernetes.io/hostname: 10.10.103.250

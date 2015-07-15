@@ -1,8 +1,6 @@
 package main
 
 import (
-	//"io"
-	//"log"
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
@@ -11,10 +9,9 @@ import (
 )
 
 func main() {
-	//x509.Certificate.
 	pool := x509.NewCertPool()
-	//caCertPath := "etcdcerts/ca.crt"
-	caCertPath := "ca.crt" // load ca file
+	caCertPath := "ca.crt"
+
 	caCrt, err := ioutil.ReadFile(caCertPath)
 	if err != nil {
 		fmt.Println("ReadFile err:", err)
@@ -22,19 +19,24 @@ func main() {
 	}
 	pool.AppendCertsFromPEM(caCrt)
 
-	tr := &http.Transport{
-		TLSClientConfig:    &tls.Config{RootCAs: pool},
-		DisableCompression: true,
-	}
-	client := &http.Client{Transport: tr}
-
-	resp, err := client.Get("https://localhost:8081")
-
+	cliCrt, err := tls.LoadX509KeyPair("client.crt", "client.key")
 	if err != nil {
-		fmt.Println("Get error", err)
+		fmt.Println("Loadx509keypair err:", err)
 		return
 	}
 
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{
+			RootCAs:      pool,
+			Certificates: []tls.Certificate{cliCrt},
+		},
+	}
+	client := &http.Client{Transport: tr}
+	resp, err := client.Get("https://localhost:8081")
+	if err != nil {
+		fmt.Println("Get error:", err)
+		return
+	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	fmt.Println(string(body))
