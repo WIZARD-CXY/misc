@@ -12,13 +12,12 @@ using namespace std;
 void mergeSort(int a[],int x, int y, int t[]){
     if(y-x>1){
         int m=(x+y)/2;
-        int p=x,q=m,i=x;
-
-        mergeSort(a,x,m,t);
-        mergeSort(a,m,y,t);
+        int p=x,i=x,q=m;
+        mergeSort(a,x,m,t);// recurse on the left side
+        mergeSort(a,m,y,t);// recurse on the right side
 
         while(p<m || q<y){
-            if(q>=y || (p<m && a[p]<= a[q])){
+            if(q>=y || (p<m && a[p]<a[q])){
                 t[i++]=a[p++];
             }else{
                 t[i++]=a[q++];
@@ -28,7 +27,6 @@ void mergeSort(int a[],int x, int y, int t[]){
         for(int i=x; i<y; i++){
             a[i]=t[i];
         }
-
     }
 }
 
@@ -37,5 +35,7 @@ int main(){
     int t[10];
     mergeSort(a,0,8,t);
 
-    cout<<a;
+   for(int i=0; i<8; i++){
+    cout<<a[i]<<" ";
+   }
 }

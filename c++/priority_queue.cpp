@@ -4,7 +4,9 @@
 using namespace std;
 struct cmp{
 	bool operator() (const int a, const int b){
-		return a%10 > b%10; 
+		//return a%10 > b%10; // gewei xiaode priority is higher
+        //return a>b; // smaller number priority higher
+        return a<b; //bigger number with higer priority,default behaviour
 	}
 };
 
