@@ -9,9 +9,13 @@
 using namespace std;
 
 void swap(int &a, int &b){
-    int temp=a;
-    a=b;
-    b=temp;
+    // avoid a==b situation
+    if(a==b){
+        return;
+    }
+    a=a^b;
+    b=b^a;
+    a=a^b;
 }
 
 void display(int a[],int n){
