@@ -66,6 +66,8 @@ int main(){
     cout<<"Before: "<<pp<<endl;
     delete pp;
     cout<<"After: "<<*pp<<endl;
-    cout<<(-120>>3)<<" "<<-120/8<<endl;
+    cout<<(-125>>3)<<" "<<-125/8<<endl;
+
+    cout<<strlen("hello")<<" "<<sizeof("hello")<<endl;
 }
 

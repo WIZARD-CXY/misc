@@ -33,7 +33,6 @@ void solve(int A[],int n){
 		}
 	}
 
-
 	sort(KK,KK+n*n);
 
 	bool found=false;
