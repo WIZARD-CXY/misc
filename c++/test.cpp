@@ -7,6 +7,7 @@
 
 #include<iostream>
 #include<cstring>
+#include<vector>
 using namespace std;
 
 class A {
@@ -67,5 +68,19 @@ int main(){
     delete pp;
     cout<<"After: "<<*pp<<endl;
     cout<<(-120>>3)<<" "<<-120/8<<endl;
+
+    int num=1;
+
+    vector<int> ivec;
+
+    ivec.push_back(num);
+
+    ivec[0]=5;
+
+    for(auto ii : ivec){
+        cout<<ii<<" "<<num<<endl;
+    }
+
+
 }
 

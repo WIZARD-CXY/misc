@@ -44,7 +44,13 @@ int main(){
     p->addCourse("math");
 
     delete p;
-    
+
+    int a=12;
+    int &b=a;
+    cout<<b<<endl;
+    int c=111;
+    b=c;
+    cout<<b<<endl;
 }
 
 
