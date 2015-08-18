@@ -25,24 +25,23 @@ void display(int a[],int n){
     cout<<endl;
 }
 
-int partition(int a[], int p, int r){
-    int i=p-1;
+int partition(int a[], int l, int r){
+    int i=l-1;
 
-    //choose a[r] as pivot
-    for(int j=p; j<r; j++){
+    for(int j=l; j<r; j++){
+        //use a[r] as pivot
         if(a[j]<a[r]){
             swap(a[++i],a[j]);
         }
     }
     swap(a[++i],a[r]);
-
     return i;
 }
-void quicksort(int a[], int p, int r){
-    if(p<r){
-        int q = partition(a,p,r);
-        quicksort(a,p,q-1);
-        quicksort(a,q+1,r);
+void quicksort(int a[], int l, int r){
+    if(l<r){
+        int p=partition(a,l,r);
+        quicksort(a,l,p-1);
+        quicksort(a,p+1,r);
     }
 }
 int main(){
