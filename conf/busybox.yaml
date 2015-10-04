@@ -12,3 +12,5 @@ spec:
     imagePullPolicy: IfNotPresent
     name: busybox
   restartPolicy: Always
+  nodeSelector:
+    kubernetes.io/hostname: 10.10.103.223
