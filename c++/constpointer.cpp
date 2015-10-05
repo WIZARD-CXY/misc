@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     //const is right of *
     int* const p3=&a; 
 
-    /*指针本身和它指向的内容都是不能被改变的所以也得初始化*/
+    /*指针本身和它指向的内容都是不能被改变的, 所以也得初始化*/
     const int* const p4=&a;
     int const* const p5=&b; 
 
