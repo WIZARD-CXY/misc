@@ -1,34 +1,31 @@
-package main 
+package main
 
 import "fmt"
 import "io/ioutil"
 import "os/exec"
 
-func main(){
+func main() {
 	dateCmd := exec.Command("date")
 	dateOut, err := dateCmd.Output()
-	if err!= nil{
+	if err != nil {
 		panic(err)
 	}
 
-   
-	fmt.Println("date command Output",string(dateOut))
-    
-    grepCmd := exec.Command("grep","hello")
+	fmt.Println("date command Output", string(dateOut))
 
-    grepIn, _:= grepCmd.StdinPipe()
-    grepOut, _:= grepCmd.StdoutPipe()
+	grepCmd := exec.Command("grep", "hello")
 
-    grepCmd.Start()
+	grepIn, _ := grepCmd.StdinPipe()
+	grepOut, _ := grepCmd.StdoutPipe()
 
-    grepIn.Write([]byte("hello grep\ngoodbye grep"))
-    grepIn.Close()
+	grepCmd.Start()
 
-    grepBytes, _:= ioutil.ReadAll(grepOut)
+	grepIn.Write([]byte("hello grep\ngoodbye grep"))
+	grepIn.Close()
 
-    grepCmd.Wait()
-    fmt.Println("> grep hello")
-    fmt.Println(string(grepBytes))
+	grepBytes, _ := ioutil.ReadAll(grepOut)
 
-
+	grepCmd.Wait()
+	fmt.Println("> grep hello")
+	fmt.Println(string(grepBytes))
 }

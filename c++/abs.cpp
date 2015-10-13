@@ -10,4 +10,4 @@ int main(){
 	cin>>x;
 
 	cout<<abs(x)<<endl;
-}
+} 

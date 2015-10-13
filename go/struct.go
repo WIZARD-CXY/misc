@@ -1,7 +1,6 @@
 package main
 
 import (
-	// "container/list"
 	"errors"
 	"fmt"
 )
@@ -27,10 +26,10 @@ func Set2(t int) {
 	*x = 3
 }
 
-type Value int
+var errEmpty = errors.New("List is empty")
 
 type Node struct {
-	Value
+	val        int
 	prev, next *Node
 }
 type List struct {
@@ -41,31 +40,27 @@ func (l *List) Front() *Node {
 	return l.head
 }
 
-func (n *Node) Next() *Node {
-	return n.next
-}
-
-func (l *List) PushBack(v Value) *List {
-	n := &Node{Value: v}
+func (l *List) PushBack(v int) *List {
+	newNode := &Node{val: v}
 
 	if l.head == nil {
-		l.head = n
+		l.head = newNode
+		l.tail = newNode
 	} else {
-		l.tail.next = n
-		n.prev = l.tail
+		//insert it to the tail
+		l.tail.next = newNode
+		newNode.prev = l.tail
+		l.tail = newNode
 	}
-	l.tail = n
 
 	return l
 }
 
-var errEmpty = errors.New("List is Empty")
-
-func (l *List) Pop() (v Value, err error) {
+func (l *List) Pop() (v int, err error) {
 	if l.tail == nil {
 		err = errEmpty
 	} else {
-		v = l.tail.Value
+		v = l.tail.val
 		l.tail = l.tail.prev
 		if l.tail == nil {
 			l.head = nil
@@ -74,16 +69,21 @@ func (l *List) Pop() (v Value, err error) {
 	return
 }
 
+func (n *Node) Next() *Node {
+	return n.next
+}
+
 func main() {
 	a := new(NameAge)
 	a.name = "Peter"
 	a.age = 42
+	fmt.Printf("%#v\n", a)
+
 	bb := 4
-	Set2(bb)
+	Set(&bb)
 	fmt.Println(bb)
 
-	fmt.Printf("%v\n", a)
-	// l := list.New()
+	//l := list.New()
 
 	l := new(List)
 
@@ -96,15 +96,21 @@ func main() {
 		fmt.Printf("error %v\n", err)
 	}
 
+	//l.PushBack(3)
+	//l.PushBack(3)
 	value, err = l.Pop()
 	if err == nil {
 		fmt.Printf("value %v\n", value)
 	} else {
 		fmt.Printf("error %v\n", err)
 	}
-	// l.PushBack(a)
+	l.PushBack(3)
+	l.PushBack(4)
+	l.PushBack(5)
+	l.PushBack(6)
+	l.PushBack(7)
 
 	for e := l.Front(); e != nil; e = e.Next() {
-		fmt.Printf("%v\n", e.Value)
+		fmt.Printf("%v\n", e.val)
 	}
 }
