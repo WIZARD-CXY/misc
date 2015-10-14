@@ -8,6 +8,7 @@
 #include<iostream>
 #include<cstring>
 #include<vector>
+#include<stack>
 using namespace std;
 
 class A {
@@ -77,6 +78,16 @@ int main(){
     ivec.push_back(num);
 
     ivec[0]=5;
+    stack<int> ss;
+    ss.push(1);
+    ss.push(2);
+
+    ss.top()=3;
+
+    while(!ss.empty()){
+        cout<<"# "<<ss.top()<<" ";
+        ss.pop();
+    }
 
     for(auto ii : ivec){
         ii++;
