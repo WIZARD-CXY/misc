@@ -20,6 +20,9 @@ const recvNumber = "+*"
 var resUrl = "http://101.200.157.98/student"
 var loginUrl = "http://101.200.157.98/login"
 
+var twilioClient *twilio.Client
+var httpClient *http.Client
+
 func init() {
 	var AccountSID, Auth_Token string
 
@@ -35,15 +38,13 @@ func init() {
 		Auth_Token = os.Getenv("TOKEN")
 	}
 
-	var twilioClient = twilio.NewClient(AccountSID, Auth_Token, nil)
+	twilioClient = twilio.NewClient(AccountSID, Auth_Token, nil)
 
 	jar, _ := cookiejar.New(nil)
-	var httpClient = &http.Client{
+	httpClient = &http.Client{
 		Jar: jar,
 	}
-	var form = url.Values{}
-	form.Add("username", "*")
-	form.Add("password", "*")
+
 }
 
 func sendSMS(res string) {
@@ -53,7 +54,7 @@ func sendSMS(res string) {
 		Body: message,
 	}
 
-	s, resp, err := client.Messages.Send(senderNumber, recvNumber, params)
+	s, resp, err := twilioClient.Messages.Send(senderNumber, recvNumber, params)
 
 	if err != nil {
 		log.Fatal(s, resp, err)
@@ -61,7 +62,10 @@ func sendSMS(res string) {
 }
 
 func getRes() string {
-	resp, err := client.PostForm(loginUrl, form)
+	form := url.Values{}
+	form.Add("username", "*")
+	form.Add("password", "*")
+	resp, err := httpClient.PostForm(loginUrl, form)
 	//resp.Body.Close()
 
 	//resp, err = client.Get(resUrl)
