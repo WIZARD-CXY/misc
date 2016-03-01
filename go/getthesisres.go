@@ -20,7 +20,7 @@ const recvNumber = "+*"
 var resUrl = "http://101.200.157.98/student"
 var loginUrl = "http://101.200.157.98/login"
 
-func sendSMS(res string) {
+func init() {
 	var AccountSID, Auth_Token string
 
 	if os.Getenv("SID") == "" {
@@ -35,7 +35,18 @@ func sendSMS(res string) {
 		Auth_Token = os.Getenv("TOKEN")
 	}
 
-	client := twilio.NewClient(AccountSID, Auth_Token, nil)
+	var twilioClient = twilio.NewClient(AccountSID, Auth_Token, nil)
+
+	jar, _ := cookiejar.New(nil)
+	var httpClient = &http.Client{
+		Jar: jar,
+	}
+	var form = url.Values{}
+	form.Add("username", "*")
+	form.Add("password", "*")
+}
+
+func sendSMS(res string) {
 	message := fmt.Sprint("message from ", res)
 
 	params := twilio.MessageParams{
@@ -50,14 +61,6 @@ func sendSMS(res string) {
 }
 
 func getRes() string {
-	jar, _ := cookiejar.New(nil)
-	client := &http.Client{
-		Jar: jar,
-	}
-	form := url.Values{}
-	form.Add("username", "*")
-	form.Add("password", "*")
-
 	resp, err := client.PostForm(loginUrl, form)
 	//resp.Body.Close()
 
