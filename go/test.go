@@ -1,16 +1,37 @@
 package main
 
-import "fmt"
 import (
-	"even"
-	"os"
+	"fmt"
 )
 
+type nb interface {
+	Dohaha()
+}
+type Point struct {
+	x, y float64
+	haha func()
+}
+
+func (p *Point) ScaleBy(factor float64) {
+	p.x *= factor
+	p.y *= factor
+}
+
+func (p Point) Dohaha() {
+	p.haha()
+}
+
+func test(a nb) {
+	a.Dohaha()
+}
 func main() {
-	fmt.Println(even.Even(2))
-	fmt.Println(os.Getenv("DOCKER_HOST"))
+	//Point{1, 2}.ScaleBy(2)
 
-	var z float64
+	a := Point{x: 1, y: 2}
+	a.haha = func() {
+		fmt.Println("haha")
+	}
 
-	fmt.Println(z, -z, 1/z, -1/z, z/z)
+	test(a)
+
 }
