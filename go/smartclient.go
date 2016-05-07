@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"sync"
 	"time"
@@ -16,8 +17,7 @@ var (
 
 // main is not changed
 func main() {
-	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
-	defer cancel()
+	ctx, cancel := context.WithTimeout(context.Background(), 4*time.Second)
 
 	fmt.Println("Hey, I'm going to do some work")
 
@@ -27,11 +27,11 @@ func main() {
 	wg.Wait()
 	select {
 	case err := <-errc:
-		fmt.Println(err)
+		log.Println(err)
 	default:
 	}
-
-	fmt.Println("Finished. I'm going home")
+	cancel()
+	log.Println("Finished. I'm going home")
 
 }
 
@@ -50,7 +50,7 @@ func work(ctx context.Context, errc chan error) {
 	req, _ := http.NewRequest("GET", "http://localhost:1111", nil)
 	go func() {
 		resp, err := client.Do(req)
-		fmt.Println("Doing http request is a hard job")
+		log.Println("Doing http request is a hard job")
 		pack := struct {
 			r   *http.Response
 			err error
@@ -62,7 +62,7 @@ func work(ctx context.Context, errc chan error) {
 	case <-ctx.Done():
 		tr.CancelRequest(req)
 		<-c // Wait for client.Do
-		fmt.Println(ctx.Err())
+		//log.Println(ctx.Err())
 		errc <- ctx.Err()
 	case ok := <-c:
 		err := ok.err
@@ -74,7 +74,7 @@ func work(ctx context.Context, errc chan error) {
 
 		defer resp.Body.Close()
 		out, _ := ioutil.ReadAll(resp.Body)
-		fmt.Printf("Server Response: %s\n", out)
+		log.Printf("Server Response: %s\n", out)
 
 	}
 
