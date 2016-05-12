@@ -32,6 +32,11 @@ type StringerContainer struct {
 	haha
 }
 
+func test(Ia haha) {
+	Ia.sayhaha()
+	fmt.Println(Ia)
+}
+
 // you can change the default sayxixi implementation
 func (StringerContainer) sayxixi() {
 	fmt.Println("xixihaha")
@@ -57,6 +62,8 @@ func main() {
 	aa.sayhaha()
 	aa.sayxixi()
 	fmt.Println(aa)
+
+	test(aa)
 
 	// the following prints: [This is Struct1], true
 	//fmt.Println(StringerContainer{Struct2{[]string{"This", "is", "Struct1"}, true}})
