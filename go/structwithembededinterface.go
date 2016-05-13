@@ -30,11 +30,14 @@ func (s Struct2) String() string {
 type StringerContainer struct {
 	Stringer
 	haha
+	zoom int
 }
 
-func test(Ia haha) {
+func test(Ia I) {
 	Ia.sayhaha()
+	//Ia.(StringerContainer).zoom = 11
 	fmt.Println(Ia)
+
 }
 
 // you can change the default sayxixi implementation
@@ -56,14 +59,25 @@ func (S) sayxixi() {
 	fmt.Println("sayxixi")
 }
 
+type I interface {
+	haha
+	Stringer
+}
+
+func NewContainer() I {
+	return &StringerContainer{Struct1{"This is Struct1"}, S{}, 1}
+}
+
 func main() {
 	// the following prints: This is Struct1
-	aa := StringerContainer{Struct1{"This is Struct1"}, S{}}
+	aa := NewContainer()
 	aa.sayhaha()
 	aa.sayxixi()
 	fmt.Println(aa)
 
 	test(aa)
+
+	fmt.Println(aa.(*StringerContainer).zoom)
 
 	// the following prints: [This is Struct1], true
 	//fmt.Println(StringerContainer{Struct2{[]string{"This", "is", "Struct1"}, true}})
