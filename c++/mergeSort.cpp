@@ -8,7 +8,6 @@
 #include<iostream>
 using namespace std;
 
-
 void mergeSort(int a[],int x, int y, int t[]){
     if(y-x>1){
         int m=(x+y)/2;
