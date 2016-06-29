@@ -14,7 +14,7 @@ void swap(int &a, int &b){
         return;
     }
     a=a^b;
-    b=b^a;
+    b=a^b;
     a=a^b;
 }
 
@@ -27,7 +27,9 @@ void display(int a[],int n){
 
 int partition(int a[], int l, int r){
     int i=l-1;
-
+    
+    // [l i] is smaller than pivot, [i+1,j-1] is larger than pivot
+    // [j r-1] is unjudged
     for(int j=l; j<r; j++){
         //use a[r] as pivot
         if(a[j]<a[r]){
@@ -37,13 +39,16 @@ int partition(int a[], int l, int r){
     swap(a[++i],a[r]);
     return i;
 }
+
 void quicksort(int a[], int l, int r){
     if(l<r){
-        int p=partition(a,l,r);
+        // get a partition point and divide and conquer
+        int p = partition(a,l,r);
         quicksort(a,l,p-1);
         quicksort(a,p+1,r);
     }
 }
+
 int main(){
     int a[100];
 
