@@ -32,7 +32,7 @@ int main()
         printf("I am father process.\n");
         //父进程睡眠1s，保证子进程输出进程id
         sleep(1);
-        printf("father process is  exited.\n");
+        printf("father process exited.\n");
     }
     return 0;
 }
