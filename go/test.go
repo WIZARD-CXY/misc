@@ -1,37 +1,27 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"log"
+	"time"
 )
 
-type nb interface {
-	Dohaha()
-}
-type Point struct {
-	x, y float64
-	haha func()
-}
-
-func (p *Point) ScaleBy(factor float64) {
-	p.x *= factor
-	p.y *= factor
-}
-
-func (p Point) Dohaha() {
-	p.haha()
-}
-
-func test(a nb) {
-	a.Dohaha()
+func foo() error {
+	return errors.New("xixi")
 }
 func main() {
-	//Point{1, 2}.ScaleBy(2)
-
-	a := Point{x: 1, y: 2}
-	a.haha = func() {
-		fmt.Println("haha")
+	now := time.Now()
+	//
+	go func() {
+		if err := foo(); err != nil {
+			log.Fatal("xixi")
+		}
+	}()
+	time.Sleep(1 * time.Second)
+	for i := 0; i < 1000; i++ {
+		fmt.Println(i, "hahah")
 	}
 
-	test(a)
-
+	fmt.Println(time.Since(now).String())
 }
