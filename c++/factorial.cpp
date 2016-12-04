@@ -24,4 +24,7 @@ int main()
         sum = (sum + factorial) % mod;
     }
     printf("%d\n", sum);
+    double i;
+    for (i = 0; i != 10; i += 0.1)
+        printf("%.1f\n", i);
 }
