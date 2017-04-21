@@ -41,7 +41,7 @@ int bs(int A[], int x, int y, int v){
 			x=m+1;
 		}
 	}
-	return x;
+	return -1;
 }
 
 int main(){
