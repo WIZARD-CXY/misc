@@ -4,14 +4,15 @@ import (
 	"fmt"
 	"sync"
 )
-      var mutex = &sync.Mutex{}
 
-func foo(){
-      mutex.Lock()
-      foo()
-       mutex.Unlock()
+var mutex = &sync.Mutex{}
+
+func foo() {
+	mutex.Lock()
+	foo()
+	mutex.Unlock()
 }
 func main() {
-        foo()
+	foo()
 	fmt.Println("Hello, playground")
 }
