@@ -14,4 +14,5 @@ func main(){
 	fmt.Printf("bits.Len(%d) = %d\n",a, bits.Len(a))
 
 	fmt.Printf("bits.OnesCount(%d) = %d\n",a, bits.OnesCount(a))
+	
 }
