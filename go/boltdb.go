@@ -4,11 +4,11 @@ import (
 	"log"
 	"os"
 
-	bolt "github.com/coreos/bbolt"
+	bolt "go.etcd.io/bbolt"
 )
 
 var (
-	keyBucketName = []byte("key")
+	keyBucketName = []byte("lease")
 )
 
 func main() {
@@ -19,10 +19,17 @@ func main() {
 	}
 
 	err = db.View(func(tx *bolt.Tx) error {
-		stats := tx.Bucket(keyBucketName).Stats()
+		//stats := tx.Bucket(keyBucketName).Stats()
+                 b := tx.Bucket(keyBucketName)
+                 c := b.Cursor()
 
-		log.Printf("db static: %#v\n", stats)
-		return nil
+	for k, v := c.First(); k != nil; k, v = c.Next() {
+		log.Printf("key=%s, value=%s\n", k, v)
+	}
+
+	return nil
+		//log.Printf("db static: %#v\n", stats)
+		//return nil
 	})
 
 	if err != nil {
