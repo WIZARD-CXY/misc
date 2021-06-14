@@ -52,6 +52,8 @@ int main(){
 	cout<<upper_bound(A,0,7,3)<<endl;//prints 5
 	cout<<lower_bound(A,0,7,4)<<endl;//prints 5
 	cout<<upper_bound(A,0,7,4)<<endl;//prints 5
+	cout<<upper_bound(A,0,7,11)<<endl;//prints 7
+	cout<<lower_bound(A,0,7,11)<<endl;//prints 7
 	cout<<bs(A,0,7,n)<<endl;//prints 6
 
 }

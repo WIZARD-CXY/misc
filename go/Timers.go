@@ -5,7 +5,7 @@ import "fmt"
 
 func main(){
 
-    timer1 := time.NewTimer(time.Second*2)
+    timer1 := time.NewTimer(999*time.Hour)
 
     <-timer1.C //block here
     fmt.Println("Timer1 expired")

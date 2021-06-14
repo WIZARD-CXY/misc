@@ -42,5 +42,4 @@ func main() {
 
 	m2[1].name = "jack"
 	fmt.Println(*m2[1])
-
 }

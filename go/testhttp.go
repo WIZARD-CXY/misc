@@ -8,7 +8,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println(r.URL)
+		fmt.Printf("nimei %#v\n",r)
 		HandleIndex(w, r)
 	})
 
